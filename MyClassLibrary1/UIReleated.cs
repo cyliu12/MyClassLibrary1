@@ -10,6 +10,9 @@ namespace MyClassLibrary1
 {
     static public class UIReleated
     {
+        /// <summary>
+        /// 強制更新UI
+        /// </summary>
         [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         static public void DoEvents()
         {
@@ -26,6 +29,9 @@ namespace MyClassLibrary1
             return null;
         }
 
+        /// <summary>
+        /// TEST. Nothing Happens.
+        /// </summary>
         static public void test()
         {
             
