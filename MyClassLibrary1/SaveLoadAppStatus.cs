@@ -7,27 +7,48 @@ using System.Threading.Tasks;
 namespace MyClassLibrary1
 {
     public static class SaveLoadAppStatus
-    {
-        public static void tester()
+    {      
+        public static void SaveObjectToFile(SaveObjects obj)
         {
-            Console.WriteLine("Hello World");
-            Console.ReadLine();
-
+            FileIO.WriteToBinaryFile("./" + obj.Name + obj.SubFilename, obj);
         }
+
+        public static SaveObjects LoadFileToFile(string fullPath)
+        {
+            return FileIO.ReadFromBinaryFile<SaveObjects>(fullPath);
+        }
+
     }
 
     [Serializable()]
     public class SaveObjects
     {
-        private static Dictionary<string,string> _stock;
+        
+        private Dictionary<string,string> _stock = new Dictionary<string, string>();
 
         public Dictionary<string,string> Stock
         {
             get { return _stock; }
         }
 
+        private string _name;
 
-        public static void AddItem(string name, string valueString)
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        private string _subfilename = ".sta";
+
+        public string SubFilename
+        {
+            get { return _subfilename; }
+            set { _subfilename = value; }
+        }
+
+
+        public void AddItem(string name, string valueString)
         {
             _stock.Add(name, valueString);
         }
