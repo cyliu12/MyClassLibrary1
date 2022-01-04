@@ -13,7 +13,7 @@ namespace MyClassLibrary1
             FileIO.WriteToBinaryFile("./" + obj.Name + obj.SubFilename, obj);
         }
 
-        public static SaveObjects LoadFileToFile(string fullPath)
+        public static SaveObjects LoadObjectFromFile(string fullPath)
         {
             return FileIO.ReadFromBinaryFile<SaveObjects>(fullPath);
         }
@@ -50,7 +50,19 @@ namespace MyClassLibrary1
 
         public void AddItem(string name, string valueString)
         {
-            _stock.Add(name, valueString);
+            
+
+            string val;
+            if (_stock.TryGetValue(name, out val))
+            {
+                // yay, value exists!
+                _stock[name] = valueString;
+            }
+            else
+            {
+                // darn, lets add the value
+                _stock.Add(name, valueString);
+            }
         }
        
 

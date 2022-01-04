@@ -45,7 +45,7 @@ namespace Tester
             Console.WriteLine("{0} = {1}", "simpleTest.Member2", simpleTest.member2);
             Console.WriteLine("{0} = {1}", "now", now.ToString("G"));
 
-            saveObjects = SaveLoadAppStatus.LoadFileToFile(fullpath);
+            saveObjects = SaveLoadAppStatus.LoadObjectFromFile(fullpath);
             Console.WriteLine("Loaded Contents");            
             foreach (var key in saveObjects.Stock.Keys)
             {
