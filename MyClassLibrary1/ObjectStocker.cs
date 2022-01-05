@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace MyClassLibrary1
 {
-    public static class SaveLoadAppStatus
+    public static class ObjectStocker
     {      
-        public static void SaveObjectToFile(SaveObjects obj)
+        public static void SaveObjectToFile(Inventory obj)
         {
             FileIO.WriteToBinaryFile("./" + obj.Name + obj.SubFilename, obj);
         }
 
-        public static SaveObjects LoadObjectFromFile(string fullPath)
+        public static Inventory LoadObjectFromFile(string fullPath)
         {
-            return FileIO.ReadFromBinaryFile<SaveObjects>(fullPath);
+            return FileIO.ReadFromBinaryFile<Inventory>(fullPath);
         }
 
     }
 
     [Serializable()]
-    public class SaveObjects
+    public class Inventory
     {
         
-        private Dictionary<string,string> _stock = new Dictionary<string, string>();
+        private Dictionary<string,string> _objects = new Dictionary<string, string>();
 
-        public Dictionary<string,string> Stock
+        public Dictionary<string,string> Objects
         {
-            get { return _stock; }
+            get { return _objects; }
         }
 
         private string _name;
@@ -39,7 +39,7 @@ namespace MyClassLibrary1
             set { _name = value; }
         }
 
-        private string _subfilename = ".sta";
+        private string _subfilename = ".inv";
 
         public string SubFilename
         {
@@ -53,15 +53,15 @@ namespace MyClassLibrary1
             
 
             string val;
-            if (_stock.TryGetValue(name, out val))
+            if (_objects.TryGetValue(name, out val))
             {
                 // yay, value exists!
-                _stock[name] = valueString;
+                _objects[name] = valueString;
             }
             else
             {
                 // darn, lets add the value
-                _stock.Add(name, valueString);
+                _objects.Add(name, valueString);
             }
         }
        

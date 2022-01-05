@@ -12,25 +12,25 @@ namespace Tester
     {
         static void Main(string[] args)
         {           
-            SaveObjects saveObjects = new SaveObjects();
-            saveObjects.Name = "test01";
+            Inventory inventory = new Inventory();
+            inventory.Name = "test01";
 
             int number1 = 10;
             int number2 = 20;            
             SimpleTest simpleTest = new SimpleTest();
             DateTime now = DateTime.Now;
-            saveObjects.AddItem("number1", number1.ToString());
-            saveObjects.AddItem("number2", number2.ToString());            
-            saveObjects.AddItem("simpleTest", FileIO.ConvertToJsonString(simpleTest));
-            saveObjects.AddItem("now", FileIO.ConvertToJsonString(now));
+            inventory.AddItem("number1", number1.ToString());
+            inventory.AddItem("number2", number2.ToString());            
+            inventory.AddItem("simpleTest", FileIO.ConvertToJsonString(simpleTest));
+            inventory.AddItem("now", FileIO.ConvertToJsonString(now));
 
-            string fullpath = "./" + saveObjects.Name + saveObjects.SubFilename;
+            string fullpath = "./" + inventory.Name + inventory.SubFilename;
 
             Console.WriteLine("Saved Contents");
-            SaveLoadAppStatus.SaveObjectToFile(saveObjects);
-            foreach (var key in saveObjects.Stock.Keys)
+            ObjectStocker.SaveObjectToFile(inventory);
+            foreach (var key in inventory.Objects.Keys)
             {
-                Console.WriteLine("{0} = {1}", key, saveObjects.Stock[key]);
+                Console.WriteLine("{0} = {1}", key, inventory.Objects[key]);
             }            
             
             number1 = 91;
@@ -45,17 +45,17 @@ namespace Tester
             Console.WriteLine("{0} = {1}", "simpleTest.Member2", simpleTest.member2);
             Console.WriteLine("{0} = {1}", "now", now.ToString("G"));
 
-            saveObjects = SaveLoadAppStatus.LoadObjectFromFile(fullpath);
+            inventory = ObjectStocker.LoadObjectFromFile(fullpath);
             Console.WriteLine("Loaded Contents");            
-            foreach (var key in saveObjects.Stock.Keys)
+            foreach (var key in inventory.Objects.Keys)
             {
-                Console.WriteLine("{0} = {1}", key, saveObjects.Stock[key]);
+                Console.WriteLine("{0} = {1}", key, inventory.Objects[key]);
             }
 
-            number1 = Convert.ToInt32(saveObjects.Stock["number1"]);
-            number2 = Convert.ToInt32(saveObjects.Stock["number2"]);
-            simpleTest = FileIO.ConvertJsonBackToObj<SimpleTest>(saveObjects.Stock["simpleTest"]);
-            now = FileIO.ConvertJsonBackToObj<DateTime>(saveObjects.Stock["now"]);
+            number1 = Convert.ToInt32(inventory.Objects["number1"]);
+            number2 = Convert.ToInt32(inventory.Objects["number2"]);
+            simpleTest = FileIO.ConvertJsonBackToObj<SimpleTest>(inventory.Objects["simpleTest"]);
+            now = FileIO.ConvertJsonBackToObj<DateTime>(inventory.Objects["now"]);
 
             Console.WriteLine("Restored Values");
             Console.WriteLine("{0} = {1}", "number1", number1.ToString());
