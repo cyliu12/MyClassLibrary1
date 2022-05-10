@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Printing;
 using System.IO;
 
+//https://stackoverflow.com/questions/58517394/print-fixeddocument-xps-to-pdf-without-showing-file-save-dialog
+
 namespace MyClassLibrary1
 {
     public static class PdfFilePrinter
