@@ -47,6 +47,12 @@ namespace MyClassLibrary1
         [DllImport("winspool.drv", EntryPoint = "WritePrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         private static extern bool WritePrinter(IntPtr hPrinter, IntPtr pBytes, int dwCount, out int dwWritten);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes">// Get XPS file bytes // eg. var bytes = memoryStream.ToArray();</param>
+        /// <param name="outputFilePath"></param>
+        /// <param name="documentTitle"></param>
         public static void PrintXpsToPdf(byte[] bytes, string outputFilePath, string documentTitle)
         {
             // Get Microsoft Print to PDF print queue
@@ -181,5 +187,6 @@ namespace MyClassLibrary1
                 throw;
             }
         }
+
     }
 }
