@@ -51,6 +51,7 @@
     <Compile Include="PdfFilePrinter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectStocker.cs" />
+    <Compile Include="StringExt.cs" />
     <Compile Include="UIReleated.cs" />
   </ItemGroup>
   <ItemGroup>
